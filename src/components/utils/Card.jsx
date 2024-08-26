@@ -11,7 +11,7 @@ export default function Card({ data }) {
             price: PropTypes.number.isRequired,
         }).isRequired,
     };
-    const { openDetail } = useContext(ShopiCartContext);
+    const { openDetail, addToCart } = useContext(ShopiCartContext);
 
     const formattedPrice = useMemo(
         () => `$${data.price.toFixed(2)}`,
@@ -21,10 +21,11 @@ export default function Card({ data }) {
     return (
         <div
             className="relative flex flex-col text-gray-700 bg-white shadow-lg rounded-xl w-56 h-[350px] mt-6"
-            onClick={() => openDetail(data)}
             role="button"
             aria-label={`View details of ${data.title}`}>
-            <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-xl h-40">
+            <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-xl h-40"
+                onClick={() => openDetail(data)}
+            >
                 <img
                     src={data.image}
                     alt={data.title}
@@ -45,7 +46,9 @@ export default function Card({ data }) {
                     <button
                         className="w-full py-2 text-white bg-gray-800 rounded-lg shadow-md transition-transform transform hover:scale-105 focus:outline-none"
                         type="button"
-                        aria-label={`Add ${data.title} to cart`}>
+                        aria-label={`Add ${data.title} to cart`}
+                        onClick={() => addToCart(data)}
+                    >
                         Add to Cart
                     </button>
                 </div>

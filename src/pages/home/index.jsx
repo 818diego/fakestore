@@ -12,7 +12,7 @@ export default function Home() {
       <div className='font-bold '> Home </div>
       <div className='grid grid-cols-5 w-full max-w-screen-xl '>
         {context.items.map((product, index) => {
-          return <Card onClick={() => context.openDetail(product)} key={index} data={product}>{product.title}</Card>
+          return <Card key={index} data={product}>{product.title}</Card>
         })}
       </div>
       <ProductoDetail />
