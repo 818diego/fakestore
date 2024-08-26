@@ -11,7 +11,6 @@ export default function Card({ data }) {
             price: PropTypes.number.isRequired,
         }).isRequired,
     };
-
     const { openDetail } = useContext(ShopiCartContext);
 
     const formattedPrice = useMemo(
