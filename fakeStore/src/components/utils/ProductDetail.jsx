@@ -1,34 +1,47 @@
-import React, { useContext } from 'react';
-import { ShopiCartContext } from '../context/index';
+import React, { useContext } from "react";
+import { ShopiCartContext } from "../context/index";
 import { XCircleIcon } from "@heroicons/react/16/solid";
 
 export default function ProductoDetail() {
-    const { isDetailOpen, closeDetail } = useContext(ShopiCartContext);
+    const { isDetailOpen, closeDetail, productToShow } =
+        useContext(ShopiCartContext);
 
-    if (!isDetailOpen) return null;
+    if (!isDetailOpen || !productToShow) return null;
 
     return (
-        <aside className="w-[360px] h-[calc(100vh-80px)] top-[68px] flex-col fixed right-4 border border-black
-        rounded-lg bg-white">
-            <div className="flex justify-between items-center p-6">
-                <h2 className="font-medium text-xl">Detail</h2>
-                <div className="cursor-pointer" onClick={closeDetail}>
-                    <XCircleIcon className="size-6" />
+        <aside
+            className="w-[320px] h-[calc(100vh-80px)] top-[68px] flex-col fixed right-4 border border-gray-200
+        rounded-xl bg-gray-50 shadow-lg">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
+                <h2 className="font-semibold text-lg text-gray-800">
+                    Product Details
+                </h2>
+                <div
+                    className="cursor-pointer text-gray-400 hover:text-gray-600"
+                    onClick={closeDetail}>
+                    <XCircleIcon className="w-5 h-5" />
                 </div>
             </div>
-            <figure>
-                {/*
-                <img className="w-full h-full rounded-lg" src={useContext.productToShow.image}
-                alt={useContext.productToShow.title}/>
-                */}
-            </figure>
-            <p className="flex flex-col p-6">
-                {/*
-                <span className="font-medium text-2xl mb-2">{context.productToShow.price}</span>
-                <span className="font-medium text-lg mb-2">{context.productToShow.title}</span>
-                <span className="font-medium text-lg mb-2">{context.productToShow.description}</span>
-                */}
-            </p>
+            <div className="p-4">
+                <figure className="mb-4">
+                    <img
+                        className="w-3/4 h-auto mx-auto rounded-lg shadow-sm"
+                        src={productToShow.image}
+                        alt={productToShow.title}
+                    />
+                </figure>
+                <div className="text-center">
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                        {productToShow.title}
+                    </h3>
+                    <p className="text-xl font-semibold text-blue-600 mb-4">
+                        ${productToShow.price}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                        {productToShow.description}
+                    </p>
+                </div>
+            </div>
         </aside>
-    )
+    );
 }
