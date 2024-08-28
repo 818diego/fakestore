@@ -8,6 +8,7 @@ export default function ShopiContext({ children }) {
     const [productToShow, setProductToShow] = useState(null);
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [orders, setOrders] = useState([]);
 
     const addToCart = (item) => {
         setCartItems((prevItems) => {
@@ -22,7 +23,7 @@ export default function ShopiContext({ children }) {
                 return [...prevItems, { ...item, quantity: 1 }];
             }
         });
-        openCart(); // Abre el carrito cuando se añade un producto
+        openCart();
     };
 
     const removeFromCart = (itemId) => {
@@ -80,6 +81,17 @@ export default function ShopiContext({ children }) {
         setIsCartOpen(false);
     };
 
+    const checkout = () => {
+        const newOrder = {
+            date: new Date().toLocaleDateString(),
+            items: cartItems,
+            total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+        };
+        setOrders([...orders, newOrder]);
+        setCartItems([]);
+        closeCart();
+    };
+
     return (
         <ShopiCartContext.Provider
             value={{
@@ -96,6 +108,8 @@ export default function ShopiContext({ children }) {
                 removeFromCart,
                 incrementQuantity,
                 decrementQuantity,
+                checkout,
+                orders,
             }}>
             {children}
         </ShopiCartContext.Provider>

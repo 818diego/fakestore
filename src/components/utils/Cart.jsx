@@ -1,12 +1,13 @@
 import { useContext, useState, useMemo, useEffect } from "react";
 import { ShopiCartContext } from "../context/index";
 import { XCircleIcon, TrashIcon, PlusIcon, MinusIcon } from "@heroicons/react/16/solid";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-    const { cartItems, isCartOpen, closeCart, removeFromCart, incrementQuantity, decrementQuantity } = useContext(ShopiCartContext);
+    const { cartItems, isCartOpen, closeCart, removeFromCart, incrementQuantity, decrementQuantity, checkout } = useContext(ShopiCartContext);
     const [isClosing, setIsClosing] = useState(false);
+    const navigate = useNavigate();
 
-    // Calcular el total del carrito
     const cartTotal = useMemo(() => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     }, [cartItems]);
@@ -23,6 +24,11 @@ export default function Cart() {
             setIsClosing(false);
             closeCart();
         }, 300);
+    };
+
+    const handleCheckout = () => {
+        checkout();
+        navigate('/myorder');
     };
 
     if (!isCartOpen && !isClosing) return null;
@@ -75,7 +81,9 @@ export default function Cart() {
                     <span className="text-lg font-semibold text-gray-800">Total</span>
                     <span className="text-lg font-semibold text-gray-800">{`$${cartTotal}`}</span>
                 </div>
-                <button className="w-full py-2 text-white bg-green-700 hover:bg-green-600 rounded-lg shadow-md transition">
+                <button
+                    onClick={handleCheckout}
+                    className="w-full py-2 text-white bg-green-700 hover:bg-green-600 rounded-lg shadow-md transition">
                     Checkout
                 </button>
             </div>
