@@ -1,6 +1,11 @@
+import { ShoppingBagIcon } from "@heroicons/react/16/solid";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ShopiCartContext } from './context/index';
 
 export default function Navbar() {
+    const { cartItems } = useContext(ShopiCartContext);
+
     const activeStyle =
         "relative text-white after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out after:scale-x-100";
     const linkStyle =
@@ -74,7 +79,7 @@ export default function Navbar() {
                 </li>
             </ul>
 
-            <ul className="flex space-x-6">
+            <ul className="flex space-x-6 items-center">
                 <li>
                     <NavLink
                         to="/myOrder"
@@ -109,6 +114,17 @@ export default function Navbar() {
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
                         Sign In
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        className="relative text-gray-300 hover:text-white">
+                        <ShoppingBagIcon className="h-6 w-6" />
+                        {cartItems.length > 0 && (
+                            <span className="absolute -top-2 -right-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                                {cartItems.length}
+                            </span>
+                        )}
                     </NavLink>
                 </li>
             </ul>
