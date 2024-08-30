@@ -20,7 +20,7 @@ export default function Card({ data }) {
 
     return (
         <div
-            className="relative flex flex-col text-gray-700 bg-white shadow-lg rounded-xl w-56 h-[350px] mt-6"
+            className="relative flex flex-col text-gray-700 bg-white rounded-xl w-56 h-[350px] mt-6"
             role="button"
             aria-label={`View details of ${data.title}`}>
             <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-xl h-40"
