@@ -12,9 +12,11 @@ export default function ShopiContext({ children }) {
 
     const addToCart = (item) => {
         setCartItems((prevItems) => {
-            const itemExists = prevItems.find(cartItem => cartItem.id === item.id);
+            const itemExists = prevItems.find(
+                (cartItem) => cartItem.id === item.id
+            );
             if (itemExists) {
-                return prevItems.map(cartItem =>
+                return prevItems.map((cartItem) =>
                     cartItem.id === item.id
                         ? { ...cartItem, quantity: cartItem.quantity + 1 }
                         : cartItem
@@ -83,13 +85,21 @@ export default function ShopiContext({ children }) {
 
     const checkout = () => {
         const newOrder = {
+            id: Date.now(),
             date: new Date().toLocaleDateString(),
             items: cartItems,
-            total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+            total: cartItems.reduce(
+                (total, item) => total + item.price * item.quantity,
+                0
+            ),
         };
-        setOrders([...orders, newOrder]);
         setCartItems([]);
         closeCart();
+        return newOrder;
+    };
+
+    const saveOrder = (order) => {
+        setOrders((prevOrders) => [...prevOrders, order]);
     };
 
     return (
@@ -109,6 +119,7 @@ export default function ShopiContext({ children }) {
                 incrementQuantity,
                 decrementQuantity,
                 checkout,
+                saveOrder,
                 orders,
             }}>
             {children}

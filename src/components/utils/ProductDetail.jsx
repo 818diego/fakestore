@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ShopiCartContext } from "../context/index";
-import { XCircleIcon } from "@heroicons/react/16/solid";
+import { XCircleIcon } from "@heroicons/react/solid";
 
 export default function ProductoDetail() {
     const { isDetailOpen, closeDetail, productToShow } =

@@ -1,4 +1,4 @@
-import { ShoppingBagIcon } from "@heroicons/react/16/solid";
+import { ShoppingBagIcon } from "@heroicons/react/solid";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShopiCartContext } from './context/index';
