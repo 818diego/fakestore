@@ -10,10 +10,13 @@ export default function AppRoutes() {
         { path: "/", element: <Home /> },
         { path: "/clothes", element: <Home /> },
         { path: "/electronics", element: <Home /> },
+        { path: "/furnitures", element: <Home /> },
+        { path: "/shoes", element: <Home /> },
         { path: "/myorders", element: <MyOrders /> },
+        { path: "/all", element: <Home /> },
         { path: "/myorder/:id", element: <MyOrder /> },
         { path: "/order-preview", element: <OrderPreview /> },
-        { path: "/*", element: <NotFound /> },
+        { path: "/*", element: <NotFound /> }, 
     ]);
 
     return routes;

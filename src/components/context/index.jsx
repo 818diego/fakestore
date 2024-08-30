@@ -9,6 +9,9 @@ export default function ShopiContext({ children }) {
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [orders, setOrders] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [searchCateogry, setSearchCategory] = useState("all");
 
     const addToCart = (item) => {
         setCartItems((prevItems) => {
@@ -59,9 +62,38 @@ export default function ShopiContext({ children }) {
     useEffect(() => {
         fetch("https://fakestoreapi.com/products")
             .then((response) => response.json())
-            .then((data) => setItems(data))
-            .catch((error) => console.error(error));
+            .then((data) => {
+                console.log(data);
+                setItems(data);
+                setFilteredItems(data);
+            }).catch((error) => console.error(error));
     }, []);
+
+    const searchItemsByTitle = (term) => {
+        setSearchTerm(term);
+        if (term.trim() === "") {
+            setFilteredItems(items);
+        } else {
+            setFilteredItems(
+                items.filter((item) =>
+                    item.title.toLowerCase().includes(term.toLowerCase())
+                )
+            );
+        }
+    };
+
+    const searchItemsByCategory = (category) => {
+        setSearchCategory(category);
+        if (category === "all") {
+            setFilteredItems(items);
+        } else {
+            setFilteredItems(
+                items.filter((item) =>
+                    item.category.toLowerCase().includes(category.toLowerCase())
+                )
+            );
+        }
+    }
 
     const openDetail = (product) => {
         setProductToShow(product);
@@ -105,7 +137,7 @@ export default function ShopiContext({ children }) {
     return (
         <ShopiCartContext.Provider
             value={{
-                items,
+                items: filteredItems,
                 isDetailOpen,
                 productToShow,
                 openDetail,
@@ -121,6 +153,10 @@ export default function ShopiContext({ children }) {
                 checkout,
                 saveOrder,
                 orders,
+                searchTerm,
+                searchItemsByTitle,
+                searchCateogry,
+                searchItemsByCategory,
             }}>
             {children}
         </ShopiCartContext.Provider>

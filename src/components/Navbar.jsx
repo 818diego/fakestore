@@ -4,7 +4,12 @@ import { NavLink } from "react-router-dom";
 import { ShopiCartContext } from './context/index';
 
 export default function Navbar() {
-    const { cartItems, openCart } = useContext(ShopiCartContext);
+    const { cartItems, openCart, searchItemsByCategory } = useContext(ShopiCartContext);
+
+    const handleCategoryClick = (category) => {
+        console.log(category);
+        searchItemsByCategory(category);
+    };
 
     const activeStyle =
         "relative text-white after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out after:scale-x-100";
@@ -16,15 +21,6 @@ export default function Navbar() {
             <ul className="flex space-x-5">
                 <li>
                     <NavLink
-                        to="/electronic"
-                        className={({ isActive }) =>
-                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
-                        }>
-                        Electronics
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
                         to="/shop"
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
@@ -34,7 +30,18 @@ export default function Navbar() {
                 </li>
                 <li>
                     <NavLink
+                        to="/electronics"
+                        onClick={() => handleCategoryClick("electronics")}
+                        className={({ isActive }) =>
+                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
+                        }>
+                        Electronics
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
                         to="/shoes"
+                        onClick={() => handleCategoryClick("women's clothing")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
@@ -44,6 +51,7 @@ export default function Navbar() {
                 <li>
                     <NavLink
                         to="/furnitures"
+                        onClick={() => handleCategoryClick("jewelery")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
@@ -53,6 +61,7 @@ export default function Navbar() {
                 <li>
                     <NavLink
                         to="/clothes"
+                        onClick={() => handleCategoryClick("men's clothing")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
@@ -62,6 +71,7 @@ export default function Navbar() {
                 <li>
                     <NavLink
                         to="/others"
+                        onClick={() => handleCategoryClick("others")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
@@ -71,6 +81,7 @@ export default function Navbar() {
                 <li>
                     <NavLink
                         to="/all"
+                        onClick={() => handleCategoryClick("all")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
