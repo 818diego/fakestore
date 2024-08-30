@@ -6,7 +6,7 @@ export default function CardOrder({ order }) {
     const navigate = useNavigate();
 
     const handleViewOrder = () => {
-        navigate(`/myorder/${order.id}`); // Navegar a la vista de detalles de la orden
+        navigate(`/myorder/${order.id}`);
     };
 
     return (
@@ -24,14 +24,14 @@ export default function CardOrder({ order }) {
             </div>
             <div className="flex mt-4 space-x-4">
                 <img
-                    src={order.items[0].image} // Mostrar la imagen del primer producto
+                    src={order.items[0].image}
                     alt={order.items[0].title}
                     className="w-20 h-20 object-cover rounded-md shadow-sm"
                 />
                 <ul className="flex-1 mt-2 space-y-2">
                     {order.items.slice(0, 3).map(
                         (
-                            item // Mostrar hasta 3 productos
+                            item
                         ) => (
                             <li key={item.id} className="flex justify-between">
                                 <span>
