@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { ShopiCartContext } from './context/index';
 
 export default function Navbar() {
-    const { cartItems } = useContext(ShopiCartContext);
+    const { cartItems, toggleCart } = useContext(ShopiCartContext);
 
     const activeStyle =
         "relative text-white after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 after:ease-in-out after:scale-x-100";
@@ -16,20 +16,20 @@ export default function Navbar() {
             <ul className="flex space-x-5">
                 <li>
                     <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
+                        }>
+                        Shopi
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
                         to="/electronic"
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
                         Electronics
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/shop"
-                        className={({ isActive }) =>
-                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
-                        }>
-                        Shop
                     </NavLink>
                 </li>
                 <li>
@@ -82,15 +82,6 @@ export default function Navbar() {
             <ul className="flex space-x-6 items-center">
                 <li>
                     <NavLink
-                        to="/myOrder"
-                        className={({ isActive }) =>
-                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
-                        }>
-                        My Order
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
                         to="/myAccount"
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
@@ -117,7 +108,8 @@ export default function Navbar() {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink
+                    <button
+                        onClick={toggleCart}
                         className="relative text-gray-300 hover:text-white">
                         <ShoppingBagIcon className="h-6 w-6" />
                         {cartItems.length > 0 && (
@@ -125,7 +117,7 @@ export default function Navbar() {
                                 {cartItems.length}
                             </span>
                         )}
-                    </NavLink>
+                    </button>
                 </li>
             </ul>
         </nav>

@@ -102,6 +102,10 @@ export default function ShopiContext({ children }) {
         setOrders((prevOrders) => [...prevOrders, order]);
     };
 
+    const toggleCart = () => {
+        setIsCartOpen(!isCartOpen);
+    };
+
     return (
         <ShopiCartContext.Provider
             value={{
@@ -121,6 +125,7 @@ export default function ShopiContext({ children }) {
                 checkout,
                 saveOrder,
                 orders,
+                toggleCart,
             }}>
             {children}
         </ShopiCartContext.Provider>

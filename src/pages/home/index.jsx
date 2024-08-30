@@ -9,7 +9,6 @@ export default function Home() {
 
   return (
     <>
-      <div className='font-bold '> Home </div>
       <div className='grid grid-cols-5 w-full max-w-screen-xl '>
         {context.items.map((product, index) => {
           return <Card key={index} data={product}>{product.title}</Card>

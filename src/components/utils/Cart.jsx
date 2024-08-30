@@ -5,7 +5,7 @@ import {
     TrashIcon,
     PlusIcon,
     MinusIcon,
-} from "@heroicons/react/solid";
+} from "@heroicons/react/outline";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
@@ -50,16 +50,14 @@ export default function Cart() {
 
     return (
         <aside
-            className={`w-[320px] h-[calc(100vh-80px)] top-[68px] flex flex-col fixed right-4 border border-gray-200
-        rounded-xl bg-white shadow-lg transition-transform duration-300 ease-in-out ${
+            className={`w-[320px] h-[calc(100vh-80px)] top-[68px] flex flex-col fixed right-4 border border-gray-600
+        rounded-xl bg-gray-800 shadow-2xl transition-transform duration-300 ease-in-out ${
             isClosing ? "animate-fadeOut" : "animate-fadeIn"
         } overflow-y-auto`}>
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-                <h2 className="font-semibold text-lg text-gray-800">
-                    Your Cart
-                </h2>
+            <div className="flex justify-between items-center p-4 border-b border-gray-600">
+                <h2 className="font-semibold text-lg text-gray-300">Your Cart</h2>
                 <div
-                    className="cursor-pointer text-gray-400 hover:text-gray-600"
+                    className="cursor-pointer text-gray-400 hover:text-gray-200"
                     onClick={handleClose}>
                     <XCircleIcon className="w-5 h-5" />
                 </div>
@@ -68,17 +66,17 @@ export default function Cart() {
                 {cartItems.map((item, index) => (
                     <li
                         key={index}
-                        className="flex items-center justify-between border-b border-gray-200 pb-4">
+                        className="flex items-center justify-between border-b border-gray-600 pb-4">
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="w-16 h-16 object-cover rounded"
+                            className="w-16 h-16 object-cover rounded-lg shadow-md"
                         />
                         <div className="flex-1 ml-4">
-                            <h3 className="text-sm font-semibold text-gray-700">
+                            <h3 className="text-sm font-semibold text-gray-300">
                                 {item.title}
                             </h3>
-                            <p className="text-sm text-gray-500">{`$${item.price.toFixed(
+                            <p className="text-sm text-gray-400">{`$${item.price.toFixed(
                                 2
                             )}`}</p>
                         </div>
@@ -86,25 +84,25 @@ export default function Cart() {
                             <div className="flex items-center space-x-2">
                                 <button
                                     onClick={() => decrementQuantity(item.id)}
-                                    className="text-gray-700 hover:text-gray-800">
+                                    className="text-gray-400 hover:text-gray-200">
                                     <MinusIcon className="w-5 h-5" />
                                 </button>
-                                <span className="text-sm font-semibold text-gray-700">
+                                <span className="text-sm font-semibold text-gray-300">
                                     {item.quantity}
                                 </span>
                                 <button
                                     onClick={() => incrementQuantity(item.id)}
-                                    className="text-gray-700 hover:text-gray-800">
+                                    className="text-gray-400 hover:text-gray-200">
                                     <PlusIcon className="w-5 h-5" />
                                 </button>
                             </div>
                             <div className="flex items-center space-x-2">
-                                <span className="text-sm font-semibold text-gray-700">{`$${(
+                                <span className="text-sm font-semibold text-gray-300">{`$${(
                                     item.price * item.quantity
                                 ).toFixed(2)}`}</span>
                                 <button
                                     onClick={() => removeFromCart(item.id)}
-                                    className="text-red-700 hover:text-red-800">
+                                    className="text-red-500 hover:text-red-300">
                                     <TrashIcon className="w-5 h-5" />
                                 </button>
                             </div>
@@ -112,12 +110,10 @@ export default function Cart() {
                     </li>
                 ))}
             </ul>
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-gray-600">
                 <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg font-semibold text-gray-800">
-                        Total
-                    </span>
-                    <span className="text-lg font-semibold text-gray-800">{`$${cartTotal}`}</span>
+                    <span className="text-lg font-semibold text-gray-300">Total</span>
+                    <span className="text-lg font-semibold text-green-400">{`$${cartTotal}`}</span>
                 </div>
                 <button
                     onClick={handleCheckout}
