@@ -8,15 +8,17 @@ import NotFound from "../pages/notFound/index";
 export default function AppRoutes() {
     const routes = useRoutes([
         { path: "/", element: <Home /> },
-        { path: "/clothes", element: <Home /> },
+        { path: "/*", element: <NotFound /> }, 
+        
         { path: "/electronics", element: <Home /> },
-        { path: "/furnitures", element: <Home /> },
-        { path: "/shoes", element: <Home /> },
-        { path: "/myorders", element: <MyOrders /> },
+        { path: "/woman", element: <Home /> },
+        { path: "/jewelery", element: <Home /> },
+        { path: "/mens", element: <Home /> },
         { path: "/all", element: <Home /> },
+
+        { path: "/myorders", element: <MyOrders /> },
         { path: "/myorder/:id", element: <MyOrder /> },
         { path: "/order-preview", element: <OrderPreview /> },
-        { path: "/*", element: <NotFound /> }, 
     ]);
 
     return routes;

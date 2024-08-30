@@ -7,7 +7,6 @@ export default function Navbar() {
     const { cartItems, openCart, searchItemsByCategory } = useContext(ShopiCartContext);
 
     const handleCategoryClick = (category) => {
-        console.log(category);
         searchItemsByCategory(category);
     };
 
@@ -40,42 +39,32 @@ export default function Navbar() {
                 </li>
                 <li>
                     <NavLink
-                        to="/shoes"
+                        to="/woman"
                         onClick={() => handleCategoryClick("women's clothing")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
-                        Shoes
+                        Woman
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
-                        to="/furnitures"
+                        to="/jewelery"
                         onClick={() => handleCategoryClick("jewelery")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
-                        Furnitures
+                        Jewelery
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
-                        to="/clothes"
+                        to="/mens"
                         onClick={() => handleCategoryClick("men's clothing")}
                         className={({ isActive }) =>
                             isActive ? `${activeStyle} ${linkStyle}` : linkStyle
                         }>
-                        Clothes
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to="/others"
-                        onClick={() => handleCategoryClick("others")}
-                        className={({ isActive }) =>
-                            isActive ? `${activeStyle} ${linkStyle}` : linkStyle
-                        }>
-                        Others
+                        Mens
                     </NavLink>
                 </li>
                 <li>
